@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}FoodGo - Delicious Food Delivered Fast{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+</head>
+<body>
+
+  <!-- FoodGo Top Navigation Bar -->
+  <header class="foodgo-navbar">
+    <div class="nav-left-section">
+      <!-- Brand Logo -->
+      <a href="{% url 'home' %}" class="brand-logo">
+        <span class="logo-dot"></span>
+        Food<span class="highlight">Go</span>
+      </a>
+
+      <!-- Location Selector -->
+      {% if user.is_authenticated %}
+      <div class="location-selector" title="Change delivery location">
+        <span class="location-icon">📍</span>
+        <div class="location-text">
+          <span class="location-label">Deliver to</span>
+          <span class="location-current">Downtown Central, Sector 4 <span class="location-arrow">▾</span></span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Search Bar in Top Nav -->
+    {% if user.is_authenticated %}
+    <div class="nav-search-container">
+      <form class="nav-search-form" onsubmit="event.preventDefault();">
+        <span class="search-symbol">🔍</span>
+        <input 
+          type="text" 
+          placeholder="Search restaurants, dishes, or cuisines..." 
+          class="nav-search-input"
+          aria-label="Search food and restaurants"
+        >
+      </form>
+    </div>
+    {% endif %}
+
+    <!-- User Profile & Action Links -->
+    <nav class="nav-right-section">
+      <ul class="nav-links">
+        {% if user.is_authenticated %}
+          <li>
+            <div class="user-pill" title="Logged in as {{ user.username }}">
+              <span class="user-avatar-badge">{{ user.first_name|first|default:user.username|first|upper }}</span>
+              <span class="user-display-name">{{ user.first_name|default:user.username }}</span>
+            </div>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="nav-btn nav-btn-danger">Log Out</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'login' %}" class="nav-btn nav-btn-outline">Sign In</a>
+          </li>
+          <li>
+            <a href="{% url 'register' %}" class="nav-btn nav-btn-primary">Register</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Flash Messages Section -->
+  {% if messages %}
+    <div class="messages-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Block -->
+  <main class="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- FoodGo Footer -->
+  <footer class="foodgo-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <span class="logo-dot"></span>
+          Food<span class="highlight">Go</span>
+        </div>
+        <p>Delicious food from your favorite local kitchens, crafted fresh and delivered with lightning speed.</p>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>FoodGo</h4>
+          <a href="#">About Us</a>
+          <a href="#">FoodGo Careers</a>
+          <a href="#">Team & Chefs</a>
+        </div>
+        <div class="footer-col">
+          <h4>Partner</h4>
+          <a href="#">Join as Restaurant</a>
+          <a href="#">FoodGo Express Rider</a>
+          <a href="#">Kitchen Cloud</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help & Support</h4>
+          <a href="#">Customer Support</a>
+          <a href="#">FAQ & Help Center</a>
+          <a href="#">Terms & Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <strong>FoodGo</strong> Inc. All rights reserved. Crafted with fresh ingredients & passion.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

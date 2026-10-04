@@ -1,0 +1,745 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}FoodGo - Delicious Food Delivered Fast{% endblock %}
+
+{% block content %}
+
+<div class="homepage-wrapper">
+
+    <!-- ===================================================== -->
+    <!-- 1. HERO SECTION -->
+    <!-- ===================================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <span class="badge-fire">🔥</span>
+                FoodGo Express Delivery
+            </div>
+
+            <h1 class="hero-headline">
+                Delicious food, delivered fast.
+            </h1>
+
+            <p class="hero-subtext">
+                Welcome, <strong>{{ full_name }}</strong>!
+                Order sizzling meals from top-rated restaurants,
+                artisanal kitchens, and local favorites delivered
+                hot to your door.
+            </p>
+
+            <!-- SEARCH -->
+
+            <div class="hero-search-box">
+
+                <span class="hero-search-icon">🔍</span>
+
+                <input
+                    type="text"
+                    placeholder="Search for restaurants, dishes (e.g. Biryani, Pizza, Burgers)..."
+                    class="hero-search-input"
+                    aria-label="Search restaurants or dishes"
+                >
+
+                <button
+                    type="button"
+                    class="hero-search-btn">
+                    Find Food
+                </button>
+
+            </div>
+
+
+            <!-- TRUST INDICATORS -->
+
+            <div class="hero-stats-row">
+
+                <div class="hero-stat-item">
+
+                    <span class="stat-icon">⚡</span>
+
+                    <span class="stat-text">
+                        <strong>25 Min</strong> Avg Delivery
+                    </span>
+
+                </div>
+
+
+                <div class="hero-stat-item">
+
+                    <span class="stat-icon">⭐</span>
+
+                    <span class="stat-text">
+                        <strong>4.8 / 5</strong> Quality Rating
+                    </span>
+
+                </div>
+
+
+                <div class="hero-stat-item">
+
+                    <span class="stat-icon">🍲</span>
+
+                    <span class="stat-text">
+                        <strong>100%</strong> Fresh Ingredients
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual-card">
+
+            <div class="visual-plate-circle">
+
+                <span class="visual-big-emoji">
+                    🍱
+                </span>
+
+
+                <div class="floating-tag tag-top">
+                    <span>⚡ Lightning Fast</span>
+                </div>
+
+
+                <div class="floating-tag tag-bottom-left">
+                    <span>⭐ 4.9 Super Chef</span>
+                </div>
+
+
+                <div class="floating-tag tag-bottom-right">
+                    <span>🌿 Farm Fresh</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- 2. FOOD CATEGORIES -->
+    <!-- ===================================================== -->
+
+    <section class="categories-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2 class="section-title">
+                    What are you craving today?
+                </h2>
+
+                <p class="section-subtitle">
+                    Explore dishes curated from top culinary genres
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="categories-grid">
+
+            {% for cat in categories %}
+
+            <div
+                class="category-card"
+                tabindex="0">
+
+                <div class="category-icon-wrapper">
+
+                    <span class="category-icon">
+                        {{ cat.icon }}
+                    </span>
+
+                </div>
+
+                <h3 class="category-name">
+                    {{ cat.name }}
+                </h3>
+
+                <span class="category-tag">
+                    {{ cat.tag }}
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- 3. PROMOTIONAL OFFERS -->
+    <!-- ===================================================== -->
+
+    <section class="offers-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2 class="section-title">
+                    FoodGo Special Offers
+                </h2>
+
+                <p class="section-subtitle">
+                    Exclusive savings curated for your next meal
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="offers-grid">
+
+            {% for offer in offers %}
+
+            <div class="offer-card {{ offer.theme_class }}">
+
+                <div class="offer-card-top">
+
+                    <span class="offer-badge">
+                        {{ offer.badge }}
+                    </span>
+
+                    <span class="offer-sparkle">
+                        ✨
+                    </span>
+
+                </div>
+
+
+                <h3 class="offer-title">
+                    {{ offer.title }}
+                </h3>
+
+
+                <p class="offer-desc">
+                    {{ offer.description }}
+                </p>
+
+
+                <div class="offer-footer">
+
+                    <div class="promo-code-box">
+
+                        <span class="code-label">
+                            CODE:
+                        </span>
+
+                        <strong class="code-value">
+                            {{ offer.code }}
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-claim-offer">
+                        Apply
+                    </button>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===================================================== -->
+    <!-- 4. POPULAR RESTAURANTS -->
+    <!-- ===================================================== -->
+
+    <section class="restaurants-section">
+
+        <div class="section-header-flex">
+
+            <div>
+
+                <h2 class="section-title">
+                    Popular Restaurants in Your Area
+                </h2>
+
+                <p class="section-subtitle">
+                    Hand-picked kitchens with unmatched taste & fast delivery
+                </p>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="filter-pills">
+
+                <button
+                    type="button"
+                    class="filter-btn active">
+                    All
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-btn">
+                    ⚡ Fast Prep
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-btn">
+                    ⭐ Rating 4.5+
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-btn">
+                    🌱 Pure Veg
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- ADD BUTTONS -->
+        <!-- ================================================= -->
+
+        <div
+            style="
+                margin: 20px 0;
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+            "
+        >
+
+            <!-- ADD RESTAURANT -->
+
+            <a
+                href="{% url 'restaurant_create' %}"
+                class="btn-view-menu">
+
+                ➕ Add Restaurant
+
+            </a>
+
+
+            <!-- ADD FOOD ITEM -->
+
+            <a
+                href="{% url 'food_create' %}"
+                class="btn-view-menu">
+
+                🍔 Add Food Item
+
+            </a>
+
+
+            <!-- VIEW ALL FOOD -->
+
+            <a
+                href="{% url 'food_list' %}"
+                class="btn-view-menu">
+
+                🍽️ View Food Items
+
+            </a>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- RESTAURANT CARDS -->
+        <!-- ================================================= -->
+
+        <div class="restaurants-grid">
+
+            {% for rest in restaurants %}
+
+            <article class="restaurant-card">
+
+
+                <!-- RESTAURANT IMAGE -->
+
+                <div
+                    class="restaurant-image-box"
+
+                    {% if rest.category == 'Pizza' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #fff1e6,
+                                #ffd6ba
+                            );
+                        "
+
+                    {% elif rest.category == 'Burgers' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #fff7d6,
+                                #ffe59a
+                            );
+                        "
+
+                    {% elif rest.category == 'Indian' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #fff0c2,
+                                #ffd166
+                            );
+                        "
+
+                    {% elif rest.category == 'Chinese' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #ffe4e6,
+                                #ffb4b4
+                            );
+                        "
+
+                    {% elif rest.category == 'Desserts' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #f5e8ff,
+                                #dfc2ff
+                            );
+                        "
+
+                    {% elif rest.category == 'Healthy' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #dcfce7,
+                                #a7f3d0
+                            );
+                        "
+
+                    {% elif rest.category == 'Beverages' %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #dff6ff,
+                                #b8e8ff
+                            );
+                        "
+
+                    {% else %}
+
+                        style="
+                            background:
+                            linear-gradient(
+                                135deg,
+                                #f1f5f9,
+                                #dbeafe
+                            );
+                        "
+
+                    {% endif %}
+                >
+
+
+                    <!-- RESTAURANT EMOJI -->
+
+                    {% if rest.category == 'Pizza' %}
+
+                        <span class="restaurant-emoji">
+                            🍕
+                        </span>
+
+                    {% elif rest.category == 'Burgers' %}
+
+                        <span class="restaurant-emoji">
+                            🍔
+                        </span>
+
+                    {% elif rest.category == 'Indian' %}
+
+                        <span class="restaurant-emoji">
+                            🍛
+                        </span>
+
+                    {% elif rest.category == 'Chinese' %}
+
+                        <span class="restaurant-emoji">
+                            🥡
+                        </span>
+
+                    {% elif rest.category == 'Desserts' %}
+
+                        <span class="restaurant-emoji">
+                            🧁
+                        </span>
+
+                    {% elif rest.category == 'Healthy' %}
+
+                        <span class="restaurant-emoji">
+                            🥗
+                        </span>
+
+                    {% elif rest.category == 'Beverages' %}
+
+                        <span class="restaurant-emoji">
+                            🥤
+                        </span>
+
+                    {% else %}
+
+                        <span class="restaurant-emoji">
+                            🍽️
+                        </span>
+
+                    {% endif %}
+
+
+                    <!-- CATEGORY BADGE -->
+
+                    <span class="restaurant-badge">
+                        {{ rest.category }}
+                    </span>
+
+
+                    <!-- FAVORITE BUTTON -->
+
+                    <button
+                        type="button"
+                        class="btn-favorite"
+                        title="Save restaurant"
+                        aria-label="Favorite">
+
+                        ♡
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- RESTAURANT BODY -->
+
+                <div class="restaurant-body">
+
+
+                    <!-- RESTAURANT NAME -->
+
+                    <div class="restaurant-main-info">
+
+                        <h3 class="restaurant-name">
+                            {{ rest.name }}
+                        </h3>
+
+
+                        <!-- CUISINE -->
+
+                        <p class="restaurant-cuisine">
+                            {{ rest.cuisine }}
+                        </p>
+
+
+                        <!-- DESCRIPTION -->
+
+                        {% if rest.description %}
+
+                        <p class="restaurant-description">
+                            {{ rest.description }}
+                        </p>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- RESTAURANT META -->
+
+                    <div class="restaurant-meta-row">
+
+
+                        <!-- RATING -->
+
+                        <div class="restaurant-rating">
+
+                            <span class="star">
+                                ★
+                            </span>
+
+                            <strong>
+                                {{ rest.rating }}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="meta-separator">
+                            •
+                        </div>
+
+
+                        <!-- DELIVERY TIME -->
+
+                        <div class="restaurant-time">
+
+                            <span>
+                                ⏱ {{ rest.delivery_time }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="meta-separator">
+                            •
+                        </div>
+
+
+                        <!-- PRICE -->
+
+                        <div class="restaurant-price">
+
+                            <span>
+                                ₹{{ rest.price_for_two }} for two
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- RESTAURANT ACTION BUTTONS -->
+
+                    <div
+                        class="restaurant-card-footer"
+                        style="
+                            display: flex;
+                            gap: 8px;
+                            flex-wrap: wrap;
+                        "
+                    >
+
+                        {% if rest.id %}
+
+
+                            <!-- VIEW MENU -->
+
+                            <a
+                                href="{% url 'restaurant_detail' rest.id %}"
+                                class="btn-view-menu">
+
+                                View Menu →
+
+                            </a>
+
+
+                            <!-- UPDATE -->
+
+                            <a
+                                href="{% url 'restaurant_update' rest.id %}"
+                                class="btn-view-menu">
+
+                                ✏️ Update
+
+                            </a>
+
+
+                            <!-- DELETE -->
+
+                            <a
+                                href="{% url 'restaurant_delete' rest.id %}"
+                                class="btn-view-menu">
+
+                                🗑️ Delete
+
+                            </a>
+
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            {% empty %}
+
+
+            <!-- ================================================= -->
+            <!-- NO RESTAURANTS -->
+            <!-- ================================================= -->
+
+            <div class="no-restaurants">
+
+                <div style="font-size: 50px;">
+                    🍽️
+                </div>
+
+                <h3>
+                    No restaurants available yet
+                </h3>
+
+                <p>
+                    Add your first restaurant to FoodGo.
+                </p>
+
+                <a
+                    href="{% url 'restaurant_create' %}"
+                    class="btn-view-menu">
+
+                    Add Restaurant
+
+                </a>
+
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

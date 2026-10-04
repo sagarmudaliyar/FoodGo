@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FoodGo - Food Items</title>
+</head>
+
+<body>
+
+<h1>FoodGo Food Items</h1>
+
+<a href="{% url 'food_create' %}">
+    <button>Add Food</button>
+</a>
+
+<hr>
+
+{% for food in food_items %}
+
+    <h2>{{ food.name }}</h2>
+
+    <p>Restaurant: {{ food.restaurant.name }}</p>
+    <p>Description: {{ food.description }}</p>
+    <p>Category: {{ food.category }}</p>
+    <p>Price: ₹{{ food.price }}</p>
+
+    <a href="{% url 'food_update' food.id %}">
+        <button>Update</button>
+    </a>
+
+    <a href="{% url 'food_delete' food.id %}">
+        <button>Delete</button>
+    </a>
+
+    <hr>
+
+{% empty %}
+
+    <p>No food items available.</p>
+
+{% endfor %}
+
+<a href="{% url 'home' %}">Back to Home</a>
+
+</body>
+</html>

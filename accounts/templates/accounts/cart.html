@@ -1,0 +1,167 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}My Cart | FoodGo{% endblock %}
+
+{% block content %}
+
+<div class="cart-page">
+
+    <div class="cart-header">
+        <h1>🛒 My Cart</h1>
+
+        <a href="{% url 'home' %}" class="back-link">
+            ← Continue Shopping
+        </a>
+    </div>
+
+
+    {% if cart_items %}
+
+        <div class="cart-container">
+
+            <!-- Cart Items -->
+            <div class="cart-items">
+
+                {% for item in cart_items %}
+
+                    <div class="cart-item">
+
+                        <!-- Food Image -->
+                        <div class="cart-item-image">
+
+                            {% if item.food_item.image %}
+
+                                <img
+                                    src="{{ item.food_item.image.url }}"
+                                    alt="{{ item.food_item.name }}"
+                                >
+
+                            {% else %}
+
+                                <span>🍽️</span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- Food Details -->
+                        <div class="cart-item-details">
+
+                            <h3>
+                                {{ item.food_item.name }}
+                            </h3>
+
+                            <p>
+                                {{ item.food_item.restaurant.name }}
+                            </p>
+
+                            <span class="cart-price">
+                                ₹{{ item.food_item.price }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- Quantity -->
+                        <div class="cart-quantity">
+
+                            <span>Quantity:</span>
+
+                            <strong>
+                                {{ item.quantity }}
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Subtotal -->
+                        <div class="cart-subtotal">
+
+                            <span>Subtotal</span>
+
+                            <strong>
+                                ₹{{ item.subtotal }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- Order Summary -->
+            <div class="cart-summary">
+
+                <h2>Order Summary</h2>
+
+
+                <div class="summary-row">
+
+                    <span>Items</span>
+
+                    <span>
+                        {{ cart_items|length }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row total-row">
+
+                    <strong>Total</strong>
+
+                    <strong>
+                        ₹{{ total }}
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="checkout-btn"
+                    type="button"
+                >
+                    Proceed to Checkout
+                </button>
+
+            </div>
+
+        </div>
+
+
+    {% else %}
+
+        <!-- Empty Cart -->
+
+        <div class="empty-cart">
+
+            <div class="empty-cart-icon">
+                🛒
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                Add some delicious food to your cart and it will appear here.
+            </p>
+
+            <a
+                href="{% url 'home' %}"
+                class="shop-btn"
+            >
+                Browse Restaurants
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

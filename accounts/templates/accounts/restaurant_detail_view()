@@ -1,0 +1,38 @@
+# ============================================================
+# RESTAURANT CREATE
+# ============================================================
+
+@login_required(login_url='login')
+def restaurant_create_view(request):
+
+    if request.method == 'POST':
+
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        cuisine = request.POST.get('cuisine')
+        rating = request.POST.get('rating')
+        delivery_time = request.POST.get('delivery_time')
+        price_for_two = request.POST.get('price_for_two')
+        category = request.POST.get('category')
+
+        Restaurant.objects.create(
+            name=name,
+            description=description,
+            cuisine=cuisine,
+            rating=rating,
+            delivery_time=delivery_time,
+            price_for_two=price_for_two,
+            category=category
+        )
+
+        messages.success(
+            request,
+            'Restaurant added successfully!'
+        )
+
+        return redirect('home')
+
+    return render(
+        request,
+        'accounts/restaurant_create.html'
+    )

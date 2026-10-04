@@ -1,0 +1,158 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<style>
+    .form-page {
+        min-height: 80vh;
+        padding: 45px 6%;
+        background: #fff8f2;
+    }
+
+    .form-container {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 35px;
+        border-radius: 22px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-header h1 {
+        margin: 0;
+        color: #e85d04;
+        font-size: 32px;
+    }
+
+    .form-header p {
+        color: #666;
+        margin-top: 8px;
+    }
+
+    .food-form p {
+        margin-bottom: 20px;
+    }
+
+    .food-form label {
+        display: block;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 7px;
+    }
+
+    .food-form input,
+    .food-form select,
+    .food-form textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 15px;
+        box-sizing: border-box;
+        background: #fff;
+    }
+
+    .food-form input:focus,
+    .food-form select:focus,
+    .food-form textarea:focus {
+        outline: none;
+        border-color: #0f766e;
+    }
+
+    .food-form textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .food-form input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+    }
+
+    .errorlist {
+        color: #dc2626;
+        padding-left: 20px;
+        margin-top: 5px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .save-btn {
+        flex: 1;
+        min-width: 180px;
+        padding: 13px 20px;
+        background: #e85d04;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .save-btn:hover {
+        background: #c94f03;
+    }
+
+    .cancel-btn {
+        flex: 1;
+        min-width: 180px;
+        padding: 13px 20px;
+        background: #e6fffb;
+        color: #0f766e;
+        border-radius: 10px;
+        text-decoration: none;
+        text-align: center;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    .cancel-btn:hover {
+        background: #ccfbf1;
+    }
+</style>
+
+<div class="form-page">
+
+    <div class="form-container">
+
+        <div class="form-header">
+            <h1>🍕 {{ title }}</h1>
+            <p>Add delicious food items to your FoodGo menu.</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="food-form">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="form-actions">
+
+                <button type="submit" class="save-btn">
+                    💾 Save Food Item
+                </button>
+
+                <a href="{% url 'food_list' %}" class="cancel-btn">
+                    ← Back to Food Items
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

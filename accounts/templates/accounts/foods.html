@@ -1,0 +1,271 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<style>
+    .foods-page {
+        padding: 40px 6%;
+        background: #fff8f2;
+        min-height: 80vh;
+    }
+
+    .foods-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .foods-header h1 {
+        color: #e85d04;
+        margin: 0;
+        font-size: 32px;
+    }
+
+    .foods-header p {
+        color: #666;
+        margin-top: 8px;
+    }
+
+    .add-food-btn {
+        background: #0f766e;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .add-food-btn:hover {
+        background: #115e59;
+    }
+
+    .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+    }
+
+    .food-card {
+        background: white;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        transition: 0.2s;
+    }
+
+    .food-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .food-image {
+        height: 180px;
+        background: linear-gradient(135deg, #ffedd5, #ccfbf1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 65px;
+    }
+
+    .food-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .food-info {
+        padding: 20px;
+    }
+
+    .food-info h2 {
+        margin: 0 0 8px;
+        color: #222;
+    }
+
+    .restaurant-name {
+        color: #0f766e;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .food-description {
+        color: #666;
+        font-size: 14px;
+        min-height: 40px;
+    }
+
+    .food-price {
+        color: #e85d04;
+        font-size: 22px;
+        font-weight: bold;
+        margin: 14px 0;
+    }
+
+    .available {
+        color: #16a34a;
+        font-weight: bold;
+    }
+
+    .unavailable {
+        color: #dc2626;
+        font-weight: bold;
+    }
+
+    .food-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        padding: 9px 13px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .update-btn {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .delete-btn {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+    .cart-btn {
+        background: #e0f2fe;
+        color: #0369a1;
+    }
+
+    .no-foods {
+        text-align: center;
+        background: white;
+        padding: 50px;
+        border-radius: 18px;
+        color: #666;
+    }
+</style>
+
+<div class="foods-page">
+
+    <div class="foods-header">
+
+        <div>
+            <h1>🍕 Food Items</h1>
+            <p>Manage all the delicious food available on FoodGo.</p>
+        </div>
+
+        <a href="{% url 'food_create' %}" class="add-food-btn">
+            ➕ Add Food Item
+        </a>
+
+    </div>
+
+
+    {% if foods %}
+
+    <div class="food-grid">
+
+        {% for food in foods %}
+
+        <div class="food-card">
+
+            <div class="food-image">
+
+                {% if food.image %}
+                    <img src="{{ food.image.url }}" alt="{{ food.name }}">
+                {% else %}
+                    🍕
+                {% endif %}
+
+            </div>
+
+
+            <div class="food-info">
+
+                <h2>{{ food.name }}</h2>
+
+                <div class="restaurant-name">
+                    🏪 {{ food.restaurant.name }}
+                </div>
+
+                <div class="food-description">
+                    {{ food.description|default:"Delicious food item from FoodGo." }}
+                </div>
+
+                <div class="food-price">
+                    ₹{{ food.price }}
+                </div>
+
+
+                {% if food.is_available %}
+                    <div class="available">
+                        ● Available
+                    </div>
+                {% else %}
+                    <div class="unavailable">
+                        ● Not Available
+                    </div>
+                {% endif %}
+
+
+                <div class="food-actions">
+
+                    <a
+                        href="{% url 'food_update' food.id %}"
+                        class="action-btn update-btn"
+                    >
+                        ✏️ Update
+                    </a>
+
+                    <a
+                        href="{% url 'food_delete' food.id %}"
+                        class="action-btn delete-btn"
+                    >
+                        🗑️ Delete
+                    </a>
+
+                    <a
+                        href="{% url 'add_to_cart' food.id %}"
+                        class="action-btn cart-btn"
+                    >
+                        🛒 Add to Cart
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="no-foods">
+
+        <h2>🍽️ No food items yet</h2>
+
+        <p>Add your first food item to the menu.</p>
+
+        <br>
+
+        <a href="{% url 'food_create' %}" class="add-food-btn">
+            ➕ Add Food Item
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

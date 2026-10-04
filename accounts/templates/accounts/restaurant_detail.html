@@ -1,0 +1,225 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}{{ restaurant.name }} - Menu | FoodGo{% endblock %}
+
+{% block content %}
+<div class="restaurant-detail-wrapper">
+
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb-bar">
+    <a href="{% url 'home' %}" class="back-link">
+      <span>←</span> Back to All Restaurants
+    </a>
+  </div>
+
+  <!-- Restaurant Hero Header Card -->
+  <section class="restaurant-header-card">
+    <div class="restaurant-header-main">
+
+      <div class="restaurant-header-info">
+
+        <div class="header-tags-row">
+          <span
+            class="detail-category-badge"
+            style="background-color: {{ restaurant.accent_color }};"
+          >
+            {{ restaurant.category }}
+          </span>
+
+          <span class="detail-status-badge">
+            {% if restaurant.is_active %}
+              Open Now
+            {% else %}
+              Currently Closed
+            {% endif %}
+          </span>
+        </div>
+
+        <h1 class="detail-restaurant-name">
+          {{ restaurant.name }}
+        </h1>
+
+        <p class="detail-restaurant-cuisine">
+          {{ restaurant.cuisine }}
+        </p>
+
+        {% if restaurant.description %}
+          <p class="detail-restaurant-desc">
+            {{ restaurant.description }}
+          </p>
+        {% endif %}
+
+        <!-- Quick Stats Row -->
+        <div class="detail-stats-row">
+
+          <div class="detail-stat-item">
+            <span class="stat-star">★</span>
+            <strong>{{ restaurant.rating }}</strong>
+            <span class="stat-muted">
+              ({{ restaurant.reviews }})
+            </span>
+          </div>
+
+          <div class="detail-stat-divider">•</div>
+
+          <div class="detail-stat-item">
+            <span>⏱</span>
+            <strong>{{ restaurant.delivery_time }}</strong>
+          </div>
+
+          <div class="detail-stat-divider">•</div>
+
+          <div class="detail-stat-item">
+            <span>💰</span>
+            <strong>{{ restaurant.price_info }}</strong>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Restaurant Image -->
+      <div
+        class="restaurant-header-visual"
+        style="background-color: {{ restaurant.accent_color }}15;"
+      >
+
+        {% if restaurant.image %}
+          <img
+            src="{{ restaurant.image.url }}"
+            alt="{{ restaurant.name }}"
+            class="detail-banner-img"
+          >
+        {% else %}
+          <span class="detail-banner-emoji">
+            {{ restaurant.icon }}
+          </span>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Menu Section -->
+  <section class="menu-section">
+
+    <div class="menu-section-header">
+
+      <div>
+        <h2 class="menu-section-title">
+          Food Menu
+        </h2>
+
+        <p class="menu-section-subtitle">
+          Freshly prepared to order by {{ restaurant.name }}
+        </p>
+      </div>
+
+      <span class="menu-items-count">
+        {{ food_items|length }} items available
+      </span>
+
+    </div>
+
+
+    {% if food_items %}
+
+      <div class="menu-items-grid">
+
+        {% for item in food_items %}
+
+          <article class="menu-item-card">
+
+            <!-- Item Details -->
+            <div class="item-info">
+
+              {% if item.category %}
+                <span class="item-category-tag">
+                  {{ item.category }}
+                </span>
+              {% endif %}
+
+              <h3 class="item-name">
+                {{ item.name }}
+              </h3>
+
+              <div class="item-price">
+                ₹{{ item.price }}
+              </div>
+
+              {% if item.description %}
+                <p class="item-desc">
+                  {{ item.description }}
+                </p>
+              {% endif %}
+
+            </div>
+
+
+            <!-- Item Image and Add Button -->
+            <div class="item-action-box">
+
+              {% if item.image %}
+
+                <div class="item-image-wrapper">
+                  <img
+                    src="{{ item.image.url }}"
+                    alt="{{ item.name }}"
+                    class="item-img"
+                  >
+                </div>
+
+              {% else %}
+
+                <div class="item-image-placeholder">
+                  <span class="item-placeholder-emoji">
+                    🍽️
+                  </span>
+                </div>
+
+              {% endif %}
+
+
+              <!-- ADD TO CART -->
+              <a
+                href="{% url 'add_to_cart' item.id %}"
+                class="btn-add-item"
+                title="Add {{ item.name }} to cart"
+              >
+                ADD <span>+</span>
+              </a>
+
+            </div>
+
+          </article>
+
+        {% endfor %}
+
+      </div>
+
+    {% else %}
+
+      <div class="empty-menu-box">
+
+        <span class="empty-icon">
+          🍽️
+        </span>
+
+        <h3>
+          No menu items available right now
+        </h3>
+
+        <p>
+          This restaurant hasn't added any available dishes to the menu yet.
+          Check back soon!
+        </p>
+
+      </div>
+
+    {% endif %}
+
+  </section>
+
+</div>
+{% endblock %}

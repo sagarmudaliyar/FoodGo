@@ -1,0 +1,115 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Update Restaurant - FoodGo{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h1>Update Restaurant</h1>
+
+    <p>Edit the restaurant information below.</p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Restaurant Name</label>
+        <input
+            type="text"
+            name="name"
+            value="{{ restaurant.name }}"
+            required
+        >
+
+        <label>Description</label>
+        <textarea
+            name="description"
+            required
+        >{{ restaurant.description }}</textarea>
+
+        <label>Cuisine</label>
+        <input
+            type="text"
+            name="cuisine"
+            value="{{ restaurant.cuisine }}"
+            required
+        >
+
+        <label>Rating</label>
+        <input
+            type="number"
+            name="rating"
+            value="{{ restaurant.rating }}"
+            step="0.1"
+            min="0"
+            max="5"
+            required
+        >
+
+        <label>Price for Two</label>
+        <input
+            type="number"
+            name="price_for_two"
+            value="{{ restaurant.price_for_two }}"
+            required
+        >
+
+        <label>Delivery Time</label>
+        <input
+            type="text"
+            name="delivery_time"
+            value="{{ restaurant.delivery_time }}"
+            required
+        >
+
+        <label>Category</label>
+
+        <select name="category" required>
+
+            <option value="Pizza"
+                {% if restaurant.category == "Pizza" %}selected{% endif %}>
+                Pizza
+            </option>
+
+            <option value="Burgers"
+                {% if restaurant.category == "Burgers" %}selected{% endif %}>
+                Burgers
+            </option>
+
+            <option value="Indian"
+                {% if restaurant.category == "Indian" %}selected{% endif %}>
+                Indian
+            </option>
+
+            <option value="Chinese"
+                {% if restaurant.category == "Chinese" %}selected{% endif %}>
+                Chinese
+            </option>
+
+            <option value="Desserts"
+                {% if restaurant.category == "Desserts" %}selected{% endif %}>
+                Desserts
+            </option>
+
+            <option value="Healthy"
+                {% if restaurant.category == "Healthy" %}selected{% endif %}>
+                Healthy
+            </option>
+
+            <option value="Beverages"
+                {% if restaurant.category == "Beverages" %}selected{% endif %}>
+                Beverages
+            </option>
+
+        </select>
+
+        <button type="submit">
+            Update Restaurant
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

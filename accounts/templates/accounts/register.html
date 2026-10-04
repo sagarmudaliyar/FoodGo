@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FoodGo - Sign Up</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* =========================
+           PAGE BACKGROUND
+        ========================== */
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #312e81
+                );
+
+            padding: 30px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
+        .container {
+
+            width: 900px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* =========================
+           LEFT SIDE
+        ========================== */
+
+        .left {
+
+            width: 42%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1e1b4b,
+                    #4f46e5
+                );
+
+            color: white;
+
+            padding: 50px 35px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            text-align: center;
+        }
+
+
+        .logo {
+
+            font-size: 40px;
+
+            font-weight: bold;
+
+            margin-bottom: 30px;
+        }
+
+
+        .left h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .left p {
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            color: #e0e7ff;
+        }
+
+
+        /* =========================
+           RIGHT SIDE
+        ========================== */
+
+        .right {
+
+            width: 58%;
+
+            padding: 40px 55px;
+        }
+
+
+        .right h1 {
+
+            font-size: 32px;
+
+            color: #222;
+
+            margin-bottom: 8px;
+        }
+
+
+        .subtitle {
+
+            color: #777;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           INPUT GROUP
+        ========================== */
+
+        .input-group {
+
+            margin-bottom: 15px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #333;
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+
+        .input-group input:focus {
+
+            border-color: #4f46e5;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(79, 70, 229, 0.12);
+        }
+
+
+        /* =========================
+           ERRORS
+        ========================== */
+
+        .error {
+
+            color: #d93025;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+
+        .general-error {
+
+            background: #ffe8e6;
+
+            color: #c62828;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           SIGN UP BUTTON
+        ========================== */
+
+        .signup-btn {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition: 0.2s;
+        }
+
+
+        .signup-btn:hover {
+
+            opacity: 0.9;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           LOGIN TEXT
+        ========================== */
+
+        .login-text {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #777;
+        }
+
+
+        .login-text a {
+
+            color: #4f46e5;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+
+        .login-text a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================== */
+
+        @media(max-width: 750px) {
+
+            .container {
+
+                flex-direction: column;
+
+                width: 100%;
+            }
+
+
+            .left,
+            .right {
+
+                width: 100%;
+            }
+
+
+            .left {
+
+                padding: 35px 25px;
+            }
+
+
+            .right {
+
+                padding: 35px 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         LEFT SIDE
+    ========================== -->
+
+    <div class="left">
+
+        <div class="logo">
+            🍔 FoodGo
+        </div>
+
+
+        <h2>
+            Welcome to FoodGo!
+        </h2>
+
+
+        <p>
+            Discover delicious food from
+            your favourite restaurants and
+            get it delivered right to your
+            doorstep.
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         RIGHT SIDE
+    ========================== -->
+
+    <div class="right">
+
+        <h1>
+            Create Account
+        </h1>
+
+
+        <p class="subtitle">
+            Join FoodGo today.
+        </p>
+
+
+        <!-- GENERAL FORM ERRORS -->
+
+        {% if form.non_field_errors %}
+
+            <div class="general-error">
+
+                {{ form.non_field_errors }}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =========================
+             FORM
+        ========================== -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- NAME -->
+
+            <div class="input-group">
+
+                <label>
+                    Name
+                </label>
+
+                {{ form.first_name }}
+
+                {% for error in form.first_name.errors %}
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <label>
+                    Email
+                </label>
+
+                {{ form.email }}
+
+                {% for error in form.email.errors %}
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="input-group">
+
+                <label>
+                    Username
+                </label>
+
+                {{ form.username }}
+
+                {% for error in form.username.errors %}
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label>
+                    Password
+                </label>
+
+                {{ form.password }}
+
+                {% for error in form.password.errors %}
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="input-group">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                {{ form.confirm_password }}
+
+                {% for error in form.confirm_password.errors %}
+
+                    <div class="error">
+                        {{ error }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="signup-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <!-- LOGIN LINK -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
